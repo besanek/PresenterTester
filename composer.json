@@ -1,0 +1,26 @@
+{
+    "name": "besanek/PresenterTester",
+    "type": "library",
+    "description": "Simple helper for testing Nette presenters.",
+    "keywords": ["mvc", "testing", "nette", "presenter"],
+    "authors": [
+        {
+            "name": "Robert Jelen",
+            "homepage": "http://robert.kdpvv.cz"
+        }
+    ],
+    "require": {
+        "nette/nette": ">=2.0.0"
+    },
+    "require-dev": {
+        "nette/tester": "@dev"
+    },
+    "autoload": {
+        "psr-0": {
+            "PresenterTester": ""
+        },
+        "classmap": [
+            "PresenterTester/exceptions.php"
+        ]
+    }
+}
