@@ -1,5 +1,5 @@
 {
-    "name": "besanek/PresenterTester",
+    "name": "besanek/presenter-tester",
     "type": "library",
     "description": "Simple helper for testing Nette presenters.",
     "keywords": ["mvc", "testing", "nette", "presenter"],
