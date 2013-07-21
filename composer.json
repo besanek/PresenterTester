@@ -2,6 +2,7 @@
     "name": "besanek/presenter-tester",
     "type": "library",
     "description": "Simple helper for testing Nette presenters.",
+    "license": ["BSD-3-Clause", "GPL-2.0", "GPL-3.0"],
     "keywords": ["mvc", "testing", "nette", "presenter"],
     "authors": [
         {
