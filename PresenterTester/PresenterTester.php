@@ -107,7 +107,7 @@ class PresenterTester extends \Nette\Object {
         if ($this->isPresenterCreated()) {
             throw new LogicException("Changing presenter name after creation of presenter has no effect. You maybe want use clean() method first.");
         }
-        if ($this->isPresenterCreated()) {
+        if ($this->isRequestCreated()) {
             throw new LogicException("Changing presenter name after creation of request has no effect. You maybe want use clean() method first.");
         }
         $this->presenter = $presenter;
