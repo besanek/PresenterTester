@@ -2,7 +2,7 @@
 
 class DumpPresenter extends \Nette\Application\UI\Presenter {
 
-    private $value;
+    public $value;
 
     public function renderDefault($parameter = NULL) {
         $text = "default";
@@ -23,6 +23,11 @@ class DumpPresenter extends \Nette\Application\UI\Presenter {
 
     public function handleChange() {
         $this->value = "changed";
+    }
+
+    public function terminate() {
+        $this->value = "deleted";
+        parent::terminate();
     }
 
 }
