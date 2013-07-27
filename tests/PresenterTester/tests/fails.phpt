@@ -20,9 +20,10 @@ Assert::exception(function () use ($tester) {
 
 $tester->clean();
 $tester->getPresenterComponent();
-Assert::exception(function () use ($tester) {
+
+Assert::error(function () use ($tester) {
             $tester->setPresenter('foo');
-        }, 'PresenterTester\LogicException');
+        }, E_USER_NOTICE);
 
 ////////////////////  Getting response before runing presenter /////////////////
 
@@ -37,18 +38,18 @@ Assert::exception(function () use ($tester) {
 $tester->clean();
 $tester->getRequest();
 
-Assert::exception(function () use ($tester) {
+Assert::error(function () use ($tester) {
             $tester->setAction('foo');
-        }, 'PresenterTester\LogicException');
+        }, E_USER_NOTICE);
 
-Assert::exception(function () use ($tester) {
+Assert::error(function () use ($tester) {
             $tester->setParams(array('foo' => 'bar'));
-        }, 'PresenterTester\LogicException');
+        }, E_USER_NOTICE);
 
-Assert::exception(function () use ($tester) {
+Assert::error(function () use ($tester) {
             $tester->setPost(array('foo' => 'bar'));
-        }, 'PresenterTester\LogicException');
+        }, E_USER_NOTICE);
 
-Assert::exception(function () use ($tester) {
+Assert::error(function () use ($tester) {
             $tester->setHandle('foo');
-        }, 'PresenterTester\LogicException');
+        }, E_USER_NOTICE);

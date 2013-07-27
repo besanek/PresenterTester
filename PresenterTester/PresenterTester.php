@@ -44,7 +44,7 @@ class PresenterTester extends \Nette\Object {
      */
     public function run() {
         if ($this->isResponseCreated()) {
-            throw new LogicException("You can not run one presenter twice. You maybe want use clean() method first.");
+            trigger_error("You can not run one presenter twice. You maybe want use clean() method first.");
         }
         $presenter = $this->createPresenter();
         $request = $this->createRequest();
@@ -105,10 +105,10 @@ class PresenterTester extends \Nette\Object {
      */
     public function setPresenter($presenter) {
         if ($this->isPresenterCreated()) {
-            throw new LogicException("Changing presenter name after creation of presenter has no effect. You maybe want use clean() method first.");
+            trigger_error("Changing presenter name after creation of presenter has no effect. You maybe want use clean() method first.");
         }
         if ($this->isRequestCreated()) {
-            throw new LogicException("Changing presenter name after creation of request has no effect. You maybe want use clean() method first.");
+            trigger_error("Changing presenter name after creation of request has no effect. You maybe want use clean() method first.");
         }
         $this->presenter = $presenter;
         return $this;
@@ -128,7 +128,7 @@ class PresenterTester extends \Nette\Object {
      */
     public function setHandle($handle) {
         if ($this->isRequestCreated()) {
-            throw new LogicException("Changing handle parameter after creation of request has no effect. You maybe want use clean() method first.");
+            trigger_error("Changing handle parameter after creation of request has no effect. You maybe want use clean() method first.");
         }
         $this->handle = $handle;
         return $this;
@@ -148,7 +148,7 @@ class PresenterTester extends \Nette\Object {
      */
     public function setAction($action) {
         if ($this->isRequestCreated()) {
-            throw new LogicException("Changing action after creation of request has no effect. You maybe want use clean() method first.");
+            trigger_error("Changing action after creation of request has no effect. You maybe want use clean() method first.");
         }
         $this->action = $action;
         return $this;
@@ -169,7 +169,7 @@ class PresenterTester extends \Nette\Object {
      */
     public function setParams(array $params) {
         if ($this->isRequestCreated()) {
-            throw new LogicException("Changing parameters after creation of request has no effect. You maybe want use clean() method first.");
+            trigger_error("Changing parameters after creation of request has no effect. You maybe want use clean() method first.");
         }
         $this->params = $params;
         return $this;
@@ -190,7 +190,7 @@ class PresenterTester extends \Nette\Object {
      */
     public function setPost(array $params) {
         if ($this->isRequestCreated()) {
-            throw new LogicException("Changing POST parameters after creation of request has no effect. You maybe want use clean() method first.");
+            trigger_error("Changing POST parameters after creation of request has no effect. You maybe want use clean() method first.");
         }
         $this->post = $params;
         return $this;
