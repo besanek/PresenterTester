@@ -44,7 +44,7 @@ class PresenterTester extends \Nette\Object {
      */
     public function run() {
         if ($this->isResponseCreated()) {
-            trigger_error("You can not run one presenter twice. You maybe want use clean() method first.");
+            throw new LogicException("You can not run one presenter twice. You maybe want use clean() method first.");
         }
         $presenter = $this->createPresenter();
         $request = $this->createRequest();
