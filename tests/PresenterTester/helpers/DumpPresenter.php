@@ -21,6 +21,10 @@ class DumpPresenter extends \Nette\Application\UI\Presenter {
         $this->sendResponse($response);
     }
 
+    public function actionException() {
+        throw new Exception;
+    }
+
     public function handleChange() {
         $this->value = "changed";
     }

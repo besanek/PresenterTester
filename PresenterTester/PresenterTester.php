@@ -31,6 +31,9 @@ class PresenterTester extends \Nette\Object {
     /** @var \Nette\Application\IResponse */
     private $response;
 
+    /** @var int */
+    private $code;
+
     /**
      * @param \Nette\Application\IPresenterFactory $presenterFactory
      */
@@ -48,14 +51,24 @@ class PresenterTester extends \Nette\Object {
         }
         $presenter = $this->createPresenter();
         $request = $this->createRequest();
-        return $this->response = $presenter->run($request);
+        
+        try {
+            $this->code = 200;
+            return $this->response = $presenter->run($request);
+        } catch (\Nette\Application\BadRequestException $e) {
+            $this->code = $e->getCode();
+        } catch (\Exception $e) {
+            $this->code = 500;
+        }
+
+        return NULL;
     }
 
     /**
      * Cleans status.
      */
     public function clean() {
-        $this->response = $this->presenterComponent = $this->request = NULL;
+        $this->code = $this->response = $this->presenterComponent = $this->request = NULL;
     }
 
     /**
@@ -226,6 +239,13 @@ class PresenterTester extends \Nette\Object {
             throw new LogicException("You can not get response before use run() menthod.");
         }
         return $this->response;
+    }
+
+    /**
+     * @return int
+     */
+    public function getHttpCode() {
+        return $this->code;
     }
 
     /**
