@@ -7,7 +7,7 @@ $container = require __DIR__ . '/../bootstrap.php';
 
 ///////////////////////////      All is ok        //////////////////////////////
 
-$tester = new PresenterTester($container->getByType('\Nette\Application\IPresenterFactory'), $container->getByType('\Nette\Http\IResponse'));
+$tester = new PresenterTester($container->getByType('\Nette\Application\IPresenterFactory'));
 $tester->setPresenter('Dump');
 $tester->setAction('default');
 $tester->run();
