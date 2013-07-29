@@ -67,8 +67,19 @@ class PresenterTester extends \Nette\Object {
     /**
      * Cleans status.
      */
-    public function clean() {
-        $this->code = $this->response = $this->presenterComponent = $this->request = NULL;
+    public function clean($what = self::CLEAN_ALL) {
+
+        if ($what & self::CLEAN_PRESENTER) {
+            $this->presenterComponent = NULL;
+        }
+
+        if ($what & self::CLEAN_REQUEST) {
+            $this->request = NULL;
+        }
+
+        if ($what & self::CLEAN_RESPONSE) {
+            $this->code = $this->response = NULL;
+        }
     }
 
     /**
@@ -268,6 +279,11 @@ class PresenterTester extends \Nette\Object {
     private function isRequestCreated() {
         return $this->request !== NULL;
     }
+
+    const CLEAN_PRESENTER = 1;
+    const CLEAN_REQUEST = 2;
+    const CLEAN_RESPONSE = 4;
+    const CLEAN_ALL = 7;
 
 }
 
