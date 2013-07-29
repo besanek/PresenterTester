@@ -2,11 +2,9 @@
 
 $dirs = array('../../vendor/', '../../libs/');
 
-$find = FALSE;
 foreach ($dirs as $dir) {
     $autoload = __DIR__ . "/" . $dir . "autoload.php";
     if (is_file($autoload)) {
-        $find = TRUE;
         require_once $autoload;
         break;
     }
