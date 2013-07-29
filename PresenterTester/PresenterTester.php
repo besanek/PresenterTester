@@ -34,6 +34,9 @@ class PresenterTester extends \Nette\Object {
     /** @var int */
     private $code;
 
+    /** @var array */
+    private $userChanges = array('presenter' => FALSE, 'request' => TRUE);
+
     /**
      * @param \Nette\Application\IPresenterFactory $presenterFactory
      */
@@ -47,7 +50,7 @@ class PresenterTester extends \Nette\Object {
      */
     public function run() {
         if ($this->isResponseCreated()) {
-            throw new LogicException("You can not run one presenter twice. You maybe want use clean() method first.");
+            $this->clean(self::CLEAN_PRESENTER);
         }
         $presenter = $this->createPresenter();
         $request = $this->createRequest();
@@ -86,9 +89,13 @@ class PresenterTester extends \Nette\Object {
      * @return \Nette\Application\UI\Presenter
      */
     private function createPresenter() {
-        if ($this->presenterComponent !== NULL) {
+        if ($this->presenterComponent !== NULL && $this->userChanges['presenter'] === FALSE) {
             return $this->presenterComponent;
         }
+
+        $this->userChanges['presenter'] = FALSE;
+        $this->clean(self::CLEAN_RESPONSE);
+
         $presenter = $this->presenterFactory->createPresenter($this->presenter);
         $presenter->autoCanonicalize = FALSE;
         return $this->presenterComponent = $presenter;
@@ -98,9 +105,11 @@ class PresenterTester extends \Nette\Object {
      * @return \Nette\Application\Request
      */
     private function createRequest() {
-        if ($this->request !== NULL) {
+        if ($this->request !== NULL && $this->userChanges['request'] === FALSE) {
             return $this->request;
         }
+
+        $this->userChanges['request'] = FALSE;
 
         $method = 'GET';
 
@@ -128,12 +137,7 @@ class PresenterTester extends \Nette\Object {
      * @throws \PresenterTester\LogicException
      */
     public function setPresenter($presenter) {
-        if ($this->isPresenterCreated()) {
-            trigger_error("Changing presenter name after creation of presenter has no effect. You maybe want use clean() method first.");
-        }
-        if ($this->isRequestCreated()) {
-            trigger_error("Changing presenter name after creation of request has no effect. You maybe want use clean() method first.");
-        }
+        $this->userChanges['request'] = $this->userChanges['presenter'] = TRUE;
         $this->presenter = $presenter;
         return $this;
     }
@@ -151,9 +155,7 @@ class PresenterTester extends \Nette\Object {
      * @throws \PresenterTester\LogicException
      */
     public function setHandle($handle) {
-        if ($this->isRequestCreated()) {
-            trigger_error("Changing handle parameter after creation of request has no effect. You maybe want use clean() method first.");
-        }
+        $this->userChanges['request'] = TRUE;
         $this->handle = $handle;
         return $this;
     }
@@ -171,9 +173,7 @@ class PresenterTester extends \Nette\Object {
      * @throws \PresenterTester\LogicException
      */
     public function setAction($action) {
-        if ($this->isRequestCreated()) {
-            trigger_error("Changing action after creation of request has no effect. You maybe want use clean() method first.");
-        }
+        $this->userChanges['request'] = TRUE;
         $this->action = $action;
         return $this;
     }
@@ -192,9 +192,7 @@ class PresenterTester extends \Nette\Object {
      * @throws \PresenterTester\LogicException
      */
     public function setParams(array $params) {
-        if ($this->isRequestCreated()) {
-            trigger_error("Changing parameters after creation of request has no effect. You maybe want use clean() method first.");
-        }
+        $this->userChanges['request'] = TRUE;
         $this->params = $params;
         return $this;
     }
@@ -213,9 +211,7 @@ class PresenterTester extends \Nette\Object {
      * @throws \PresenterTester\LogicException
      */
     public function setPost(array $params) {
-        if ($this->isRequestCreated()) {
-            trigger_error("Changing POST parameters after creation of request has no effect. You maybe want use clean() method first.");
-        }
+        $this->userChanges['request'] = TRUE;
         $this->post = $params;
         return $this;
     }
