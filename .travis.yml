@@ -1,0 +1,9 @@
+language: php
+php:
+  - 5.5
+  - 5.4
+  - 5.3.3
+script: VERBOSE=true ./tests/run-tests.sh -s tests/
+before_script:
+  # Install Nette Tester
+  - composer install --no-interaction --dev

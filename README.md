@@ -40,3 +40,5 @@ Future
 ----------
 - Ajax support
 - Native support for formular sending
+
+[![Build Status](https://travis-ci.org/besanek/PresenterTester.png?branch=master)](https://travis-ci.org/besanek/PresenterTester)
