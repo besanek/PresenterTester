@@ -15,6 +15,11 @@ if (!class_exists('Tester\Assert')) {
     exit(1);
 }
 
+if (extension_loaded('xdebug')) {
+    xdebug_disable();
+    Tester\CodeCoverage\Collector::start(__DIR__ . '/coverage.dat');
+}
+
 Tester\Helpers::setup();
 
 define('TEMP_DIR', __DIR__ . '/../tmp/' . getmypid());
