@@ -20,7 +20,7 @@ if (extension_loaded('xdebug')) {
     Tester\CodeCoverage\Collector::start(__DIR__ . '/coverage.dat');
 }
 
-Tester\Helpers::setup();
+Tester\Environment::setup();
 
 define('TEMP_DIR', __DIR__ . '/../tmp/' . getmypid());
 Tester\Helpers::purge(TEMP_DIR);
