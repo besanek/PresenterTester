@@ -3,6 +3,7 @@ php:
   - 5.5
   - 5.4
   - 5.3.3
+  - hhvm
 script: VERBOSE=true ./tests/run-tests.sh -s tests/
 before_script:
   # Install Nette Tester
