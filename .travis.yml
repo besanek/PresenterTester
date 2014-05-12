@@ -4,7 +4,13 @@ php:
   - 5.4
   - 5.3.3
   - hhvm
+env:
+  - NETTE_VERSION="2.0.*"
+  - NETTE_VERSION="2.1.*"
+  - NETTE_VERSION="2.2.*"
 script: VERBOSE=true ./tests/run-tests.sh -s tests/
+install:
+   - composer require nette/nette:${NETTE_VERSION}
 before_script:
   # Install Nette Tester
   - composer install --no-interaction --dev --prefer-source
