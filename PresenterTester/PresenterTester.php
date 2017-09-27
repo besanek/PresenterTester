@@ -33,6 +33,9 @@ class PresenterTester extends \Nette\Object {
 
     /** @var int */
     private $code;
+    
+    /** @var bool */
+    private $withExceptions = false;
 
     /**
      * @param \Nette\Application\IPresenterFactory $presenterFactory
@@ -45,7 +48,7 @@ class PresenterTester extends \Nette\Object {
      * Let's run the presenter!
      * @return \Nette\Application\IResponse
      */
-    public function run() {
+    public function run($withoutException = true) {
         if ($this->isResponseCreated()) {
             throw new LogicException("You can not run one presenter twice. You maybe want use clean() method first.");
         }
@@ -59,10 +62,20 @@ class PresenterTester extends \Nette\Object {
             $this->code = $e->getCode();
         } catch (\Exception $e) {
             $this->code = 500;
+            if($this->withExceptions) throw new \Tester\TestCaseException($e->getMessage(), $e->getCode(), $e);
         }
 
         return NULL;
     }
+    
+	/**
+	 * Set throw exception on run()
+	 * @param bool $withExceptions
+	 */
+    public function setWithException($withExceptions = true)
+	{
+		$this->withExceptions = $withExceptions;
+	}
 
     /**
      * Cleans status.
